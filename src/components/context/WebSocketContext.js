@@ -49,8 +49,7 @@ const WebSocketContext = createContext();
 // WebSocket Provider Component
 export const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
-  const { setIncomingCall, setCallState } = useCallContext(); // Use CallContext to update call states
-
+  const { setIncomingCall, setCallState} = useCallContext(); // Use CallContext to update call states
   useEffect(() => {
     const handleIncomingMessage = (event) => {
       const receivedData = JSON.parse(event.data);

@@ -36,6 +36,7 @@ const CallingInterface = ({
   const [callingSound, setCallingSound] = useState(null);
   const [ringtone, setRingtone] = useState(false);
   const { callStatus, setCallStatus, callType, setCallType } = useCallContext();
+  console.log("CallingInterface",socket);
   let ringtoneRef = useRef(null);
 
   useEffect(() => {
@@ -89,6 +90,7 @@ const CallingInterface = ({
         setLocalTracks({ audio: audioTrack, video: videoTrack });
         return [audioTrack, videoTrack];
       } else {
+        console.log("audioTrack", audioTrack)
         setLocalTracks({ audio: audioTrack, video: null });
         return [audioTrack];
       }
@@ -99,7 +101,7 @@ const CallingInterface = ({
 
   useEffect(() => {
     if (user === "caller") {
-      initiateCall();
+      initiateCall(socket);
     } else {
       acceptCall(socket);
     }
@@ -151,7 +153,7 @@ const CallingInterface = ({
     console.log("Ringtone stopped.");
   };
 
-  const initiateCall = () => {
+  const initiateCall = (socket) => {
     if (isCalling) {
       console.log(
         "Call is already initiated. Ignoring duplicate call request."
@@ -168,7 +170,7 @@ const CallingInterface = ({
       to: receiver._id,
       callType: callerCallType,
     };
-    console.log("Initiating call with message:", message);
+    console.log("Initiating call with message:", message, socket);
     sendMessage(socket, message); // Send call initiation message
     // stopRingtone()
     initAgora(true);
@@ -211,11 +213,12 @@ const CallingInterface = ({
       }
 
       // Step 4: Publish local tracks
-      if (audioTrack && videoTrack) {
+      if (callType === "video" && audioTrack && videoTrack) {
         await client.publish([audioTrack, videoTrack]);
-        console.log(
-          `${isInitiator ? "Initiator" : "Receiver"} published local tracks.`
-        );
+        console.log("callTypevv", callType); // Publish both audio and video tracks
+      } else if (callType === "audio" && audioTrack) {
+        await client.publish([audioTrack]);
+        console.log("callTypeaud", callType); // Publish only the audio track
       }
 
       // Step 5: Handle remote user tracks
@@ -224,6 +227,9 @@ const CallingInterface = ({
         await client.subscribe(user, mediaType); // Subscribe to the remote user
         console.log(`Subscribed to user ${user.uid}'s ${mediaType} track.`);
 
+        if (mediaType === "audio") {
+          user.audioTrack.play(); // Play remote audio
+        }
         if (mediaType === "video") {
           const remoteVideoContainer = document.getElementById("remote-video");
           if (!remoteVideoContainer) {
@@ -238,9 +244,7 @@ const CallingInterface = ({
           }
         }
 
-        if (mediaType === "audio") {
-          user.audioTrack.play(); // Play remote audio
-        }
+        
       });
 
       // Step 6: Handle remote user leaving
@@ -323,7 +327,7 @@ const CallingInterface = ({
   const toggleMuteAudio = () => {
     if (localTracks.audio) {
       const newMuteState = !audioMuted;
-      localTracks.audio.setMuted(newMuteState); // Mute or unmute only the local user's audio
+      localTracks.audio.setEnabled(!newMuteState); // Mute or unmute only the local user's audio
       setAudioMuted(newMuteState); // Update the local mute state in UI
       console.log(`Audio muted: ${newMuteState}`);
     } else {

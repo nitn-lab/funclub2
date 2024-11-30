@@ -23,8 +23,8 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
   const senderId = localStorage.getItem("id");
   const token = localStorage.getItem("jwtToken");
   const [agoraToken, setAgoraToken] = useState();
-  const {callType, setCallType} = useCallContext();
-
+  const {callType, setCallType, setIncomingCall, setCallState} = useCallContext();
+  console.log("ChatScreen",socket);
   const fetchChatHistory = async () => {
     try {
       const response = await axios.post(
@@ -59,7 +59,12 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
         console.log("Received message:", newMessage);
 
         // check typing status
-        if (newMessage.type === "typing" && newMessage.from === receiver._id) {
+        if (message.type === "incomingCall" && message.from) {
+          // Display incoming call UI
+          setIncomingCall(message);
+          setCallState("incoming");
+          // initAgora(false);
+        } else if (newMessage.type === "typing" && newMessage.from === receiver._id) {
           setIsTyping(true);
         } else if (
           newMessage.type === "stopTyping" &&
@@ -109,6 +114,7 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
   };
 
   const handleSend = () => {
+    console.log("before sending message:", senderId, receiver._id);
     if (message && socket) {
       const messageData = {
         type: "chatMessage",

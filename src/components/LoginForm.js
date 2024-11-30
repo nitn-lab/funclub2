@@ -4,7 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserContext } from "./context/UserContext"; 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import {useCallContext} from "../components/context/CallContext"
+import {sendMesage} from "../services/websocket";
 export default function LoginForm({onForgotPassword}) {
   const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -13,7 +14,7 @@ export default function LoginForm({onForgotPassword}) {
   const [loading, setLoading] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false); 
-
+  const { userId, setUserId } = useCallContext();
   const navigate = useNavigate();
   const { userEmail, updateEmail } = useContext(UserContext);
 
@@ -39,8 +40,8 @@ export default function LoginForm({onForgotPassword}) {
         localStorage.setItem('jwtToken', response.data.jwtToken);
         toast.success("Successfully logged in!!");
         localStorage.setItem("id",response.data.tokenObject._id);
-        
-      
+        setUserId(response.data.tokenObject._id)
+    
         if (rememberMe) {
           updateEmail(email);
         } else {
@@ -58,6 +59,8 @@ export default function LoginForm({onForgotPassword}) {
       }
     }
   }
+
+ 
 
   return (
     <div className="w-full h-full text-primary-light dark:text-primary-dark px-6 xs:px-3 xl:py-6 py-24 font-gotham font-light">

@@ -47,6 +47,7 @@ export const CallProvider = ({ children }) => {
   const [showInterface, setShowInterface] = useState(false);
   const [callStatus, setCallStatus] = useState(false);
   const [callType, setCallType] = useState("default");
+  const [userID, setUserId] = useState();
 
   const acceptCall = () => {
     setCallState("active");
@@ -74,6 +75,8 @@ export const CallProvider = ({ children }) => {
         callStatus,
         callType,
         setCallType,
+        setUserId,
+        userID
       }}
     >
       {children}

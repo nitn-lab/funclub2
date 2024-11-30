@@ -1,14 +1,14 @@
 // services/websocket.js
 
 // 43.204.147.20    (28 nov)
-const WEBSOCKET_URL = " wss://backendapifunclub.yourwebstore.org.in/ws/";   
-// const WEBSOCKET_URL = "ws://localhost:4000";
+// const WEBSOCKET_URL = " wss://backendapifunclub.yourwebstore.org.in/ws/";   
+const WEBSOCKET_URL = "ws://localhost:4000";
 
 
 export const CreateWebSocketConnection = (onMessage) => {
   const ws = new WebSocket(WEBSOCKET_URL);
   const userId = localStorage.getItem("id");
-  console.log("uerid", userId);
+  console.log("USERID", userId, onMessage);
   ws.onopen = () => {
     console.log("WebSocket connection opened");
     if (userId) {
