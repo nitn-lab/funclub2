@@ -1,0 +1,37 @@
+[
+  {
+    "_id" : 1,
+    "src": "https://videos.pexels.com/video-files/8135646/8135646-sd_360_640_25fps.mp4",
+    "username": "Charlie",
+    "profileImage": "https://images.pexels.com/photos/10094553/pexels-photo-10094553.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id" : 2,
+    "src": "https://videos.pexels.com/video-files/6584519/6584519-sd_360_640_25fps.mp4",
+    "username": "Selena",
+    "profileImage": "https://images.pexels.com/photos/4668513/pexels-photo-4668513.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id" : 3,
+    "src": "https://videos.pexels.com/video-files/6003986/6003986-sd_360_640_30fps.mp4",
+    "username": "Jennifer",
+    "profileImage": "https://images.pexels.com/photos/4668527/pexels-photo-4668527.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {"_id" : 4,
+    "src": "https://videos.pexels.com/video-files/6784449/6784449-sd_360_640_24fps.mp4",
+    "username": "Ariana",
+    "profileImage": "https://images.pexels.com/photos/14096014/pexels-photo-14096014.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id" : 5,
+    "src": "https://videos.pexels.com/video-files/4881632/4881632-sd_960_506_25fps.mp4",
+    "username": "Maya",
+    "profileImage": "https://images.pexels.com/photos/4577191/pexels-photo-4577191.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "_id" : 6,
+    "src": "https://videos.pexels.com/video-files/7293850/7293850-sd_640_360_30fps.mp4",
+    "username": "Claire",
+    "profileImage": "https://images.pexels.com/photos/4050349/pexels-photo-4050349.jpeg?auto=compress&cs=tinysrgb&w=600"
+  }
+]

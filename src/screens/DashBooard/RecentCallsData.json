@@ -1,0 +1,57 @@
+[
+    {
+      "_id": 1,
+      "firstname": "John",
+      "lastname": "Doe",
+      "username": "john_doe",
+      "profile_url": "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "city" : "New York",
+      "gender" : "Male",
+      "lookingFor" : "Marriage",
+      "followers" : "5k",
+      "following" : "250",
+      "post" : "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600"
+    
+    },
+    {
+      "_id": 2,
+      "firstname": "Jane",
+      "lastname": "Doe",
+      "username": "jane_doe",
+      "profile_url": "https://images.pexels.com/photos/762041/pexels-photo-762041.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "city" : "Hong Kong",
+      "gender" : "Female",
+      "lookingFor" : "Friendship",
+      "followers" : "10k",
+      "following" : "20",
+      "post" : "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "_id": 3,
+      "firstname": "Jack",
+      "lastname": "Doe",
+      "username": "jack_doe",
+      "profile_url": "https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "city" : "Venice",
+      "gender" : "Male",
+      "lookingFor" : "Something Casual",
+      "followers" : "2k",
+      "following" : "50",
+      "post" : "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600"
+    },
+    {
+      "_id": 4,
+      "firstname": "Jordan",
+      "lastname": "Doe",
+      "username": "jordan_doe",
+      "profile_url": "https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "city" : "Seoul",
+      "gender" : "Male",
+      "lookingFor" : "Dates",
+      "followers" : "990",
+      "following" : "220",
+      "post" : "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600"
+    }
+   
+  ]
+  

@@ -1,0 +1,305 @@
+*{
+  scrollbar-width: auto;
+}
+
+html{
+   scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Gotham", sans-serif;
+}
+input::placeholder {
+  color: black !important;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none;
+}
+
+input:-webkit-autofill {
+  background-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+input:-moz-autofill {
+  background-color: white !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  color: black !important;
+}
+
+textarea{
+  resize: none;
+}
+
+.sidebar {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (max-width: 560px) {
+  .signup {
+    height: 78%;
+  }
+}
+
+.ps-menu-button {
+  padding-left: 20px !important;
+}
+
+.active {
+  background-color: white !important;
+  color: black !important;
+  margin: 0 6px 0 6px !important;
+  border-radius: 5px !important;
+}
+
+.pulse-button {
+  position: relative;
+  display: inline-block;
+}
+
+.pulse-button .relative {
+  position: relative;
+  z-index: 10;
+}
+
+.pulse-button span {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.scrollable-div {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.customModal {
+  border-radius: 5px;
+  font-family: "Gotham", sans-serif;
+  color: black !important;
+}
+
+.customSearchModal {
+  padding: 0 !important;
+  border-radius: 10px;
+  font-family: "Gotham", sans-serif;
+  font-weight: 300;
+  color: white !important;
+  background-color: #0f0e0e !important;
+  width: 400px !important;
+  max-width: 400px !important;
+  max-height: 400px !important;
+}
+
+@media (max-width:438px){
+
+  .customSearchModal, .customPostModal {
+    width: 300px !important;
+  }
+}
+
+.customCommentModal {
+  padding: 0 !important;
+  border-radius: 10px;
+  font-family: "Gotham", sans-serif;
+  font-weight: 300;
+  color: white !important;
+  background-color: #0f0e0e !important;
+  max-height: 80vh !important;
+  width: 80vw !important;
+  max-width: 80vw !important;
+}
+
+.customPostModal{
+  padding: 10px !important;
+  border-radius: 10px;
+  font-family: "Gotham", sans-serif;
+  font-weight: 300;
+  color: white !important;
+  background-color: #0f0e0e !important;
+  width: 400px !important;
+  max-width: 400px !important;
+}
+/* Blob animation keyframes */
+@keyframes blob {
+  0%,
+  100% {
+    border-radius: 44% 56% 66% 66% / 45% 45% 55% 55%;
+    transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+  }
+  33% {
+    border-radius: 66% 33% 44% 55% / 33% 22% 77% 66%;
+    transform: translate3d(0, 5px, 0) rotateZ(0.01deg);
+  }
+  50% {
+    transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+  }
+  66% {
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+    transform: translate3d(0, -3px, 0) rotateZ(0.01deg);
+  }
+}
+
+/* Apply blob animation */
+.animate-blob {
+  animation: blob 3.5s infinite linear;
+}
+
+/* flip */
+
+.flip-container {
+  perspective: 1000px;
+}
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.9s;
+}
+
+.flip-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+.back {
+  transform: rotateY(180deg);
+}
+
+/* login forget password animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Slide-in and slide-out classes */
+.slide-in-right {
+  animation: slideInRight 0.5s forwards;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 0.5s forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.5s forwards;
+}
+
+/* Add this CSS to your main CSS file */
+@keyframes slideUp {
+  from {
+   
+    transform: translateY(100%);
+  }
+  to {
+  
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.9s ease-out ;
+}
+
+.dot-animation::after{
+  content: "";
+  
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots{
+  0%{
+    content: ".";
+  }
+  33%{
+    content: "..";
+  }
+  66%{
+    content: "...";
+  }
+  100%{
+    content: "....";
+  }
+}
