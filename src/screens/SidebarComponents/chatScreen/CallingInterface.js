@@ -20,8 +20,8 @@ const CallingInterface = ({
   callerCallType,
   user,
 }) => {
-  const [audioMuted, setAudioMuted] = useState(false);
-  const [videoMuted, setVideoMuted] = useState(false);
+  const [audioMuted, setAudioMuted] = useState(true);
+  const [videoMuted, setVideoMuted] = useState(true);
   const [localTracks, setLocalTracks] = useState({ audio: null, video: null });
   const localContainer = useRef(null);
   const client = useRef(
@@ -214,6 +214,7 @@ const CallingInterface = ({
 
       // Step 4: Publish local tracks
       if (callType === "video" && audioTrack && videoTrack) {
+        await videoTrack.setEnabled(true);
         await client.publish([audioTrack, videoTrack]);
         console.log("callTypevv", callType); // Publish both audio and video tracks
       } else if (callType === "audio" && audioTrack) {
@@ -316,7 +317,6 @@ const CallingInterface = ({
         channelName: data?.channelName,
       });
       stopRingtone();
-      // console.log("calllllllllllllinnnnnnng acceptCall", data, socket);
 
       initAgora(false);
 
@@ -327,17 +327,13 @@ const CallingInterface = ({
   const toggleMuteAudio = () => {
     if (localTracks.audio) {
       const newMuteState = !audioMuted;
-      localTracks.audio.setEnabled(!newMuteState); // Mute or unmute only the local user's audio
+      localTracks.audio.setEnabled(newMuteState);
       setAudioMuted(newMuteState); // Update the local mute state in UI
       console.log(`Audio muted: ${newMuteState}`);
     } else {
       console.error("No local audio track available to mute/unmute.");
     }
-    // if (localTracks.audio) {
-    //   const newMuteState = !audioMuted;
-    //   localTracks.audio.setMuted(newMuteState);
-    //   setAudioMuted(newMuteState);
-    // }
+    
   };
 
   const toggleMuteVideo = async () => {
@@ -347,11 +343,6 @@ const CallingInterface = ({
       setVideoMuted(newMuteState);
       console.log(`Video muted: ${newMuteState}`);
     }
-    // if (localTracks.video) {
-    //   const newMuteState = !videoMuted;
-    //   localTracks.video.setMuted(newMuteState);
-    //   setVideoMuted(!videoMuted);
-    // }
   };
 
   return (
@@ -380,9 +371,9 @@ const CallingInterface = ({
         <div className="flex gap-10 justify-between absolute bottom-28">
           <button
             onClick={toggleMuteAudio}
-            className="bg-white text-black py-2 px-4 rounded-full hover:bg-gray-200"
+            className="bg-white text-black py-2 px-4 r ounded-full hover:bg-gray-200"
           >
-            {audioMuted ? <MicOffIcon /> : <MicIcon />}
+            {audioMuted ? <MicIcon /> : <MicOffIcon /> }
           </button>
 
           <button
@@ -397,7 +388,7 @@ const CallingInterface = ({
               onClick={toggleMuteVideo}
               className="bg-white text-black py-2 px-4 rounded-full hover:bg-gray-200"
             >
-              {videoMuted ? <VideocamOffIcon /> : <VideocamIcon />}
+              {videoMuted ? <VideocamIcon /> : <VideocamOffIcon />}
             </button>
           ) : (
             <p></p>

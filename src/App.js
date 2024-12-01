@@ -62,7 +62,7 @@ const App = () => {
         console.log("Incoming call set:", message);
       } else if (message.type === "callEnded") {
         setIncomingCall(null); // Reset state if the call ends
-        setCallState(null);
+        setCallState("idle");
         setCallType("default")
         console.log("Call ended");
       }
@@ -218,8 +218,7 @@ const App = () => {
               endVideoCall={() => setShowInterface(false)}
             />
           ))
-        : callState === "incoming" &&
-          incomingCall && (
+        : callState === "incoming" && (
             <IncomingCallModal
               callerId={incomingCall}
               onAccept={() => {
