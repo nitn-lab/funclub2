@@ -59,9 +59,9 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
         console.log("Received message:", newMessage);
 
         // check typing status
-        if (message.type === "incomingCall" && message.from) {
+        if (newMessage.type === "incomingCall" && newMessage.from) {
           // Display incoming call UI
-          setIncomingCall(message);
+          setIncomingCall(newMessage);
           setCallState("incoming");
           // initAgora(false);
         } else if (newMessage.type === "typing" && newMessage.from === receiver._id) {
