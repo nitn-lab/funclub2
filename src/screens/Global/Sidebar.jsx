@@ -103,7 +103,7 @@ function Sidebarr(props) {
         className="sidebar"
       >
         <div className="flex items-center justify-between mx-3 ">
-          <img src={logo} className={`h-8 ${collapsed ? "hidden" : "block"}`} />
+          <img src={logo} className={`h-8 cursor-pointer ${collapsed ? "hidden" : "block"}`} onClick={() => window.location.reload()}/>
           <div className={`flex items-center`}>
           <button className="md:hidden" onClick={() => { setCollapsed(!collapsed); }}>
               <img src={menu} className={`h-6  md:hidden z-20 ${collapsed ? "my-3 ml-3.5" : ""}`} />
