@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import {
   createBrowserRouter,
@@ -49,6 +49,28 @@ const App = () => {
     setCallState,
     setCallType
   } = useCallContext();
+  let ringtoneRef = useRef(null);
+  const startRingtone = () => {
+    if (!ringtoneRef.current) {
+      console.error("startRingtone")
+      ringtoneRef.current = new Audio("/ringtone-126505.mp3");
+
+      // ringtoneRef.current = new Audio("/ringtone-126505.mp3");
+      ringtoneRef.current.loop = true;
+    }
+    ringtoneRef.current
+    .play()
+    .catch((error) => console.error("Failed to play ringtone:", error));
+  };
+  const stopRingtone = () => {
+    console.log("ringtoneRef.current", ringtoneRef.current);
+    if (ringtoneRef.current) {
+      ringtoneRef.current.pause();
+      ringtoneRef.current.currentTime = 0; // Reset audio playback to the start
+      ringtoneRef.current = null;
+    }
+    console.log("Ringtone stopped.");
+  };
   useEffect(() => {
     const socket = CreateWebSocketConnection();
     setPassSocket(socket);
@@ -56,14 +78,17 @@ const App = () => {
       const message = JSON.parse(event.data);
       console.log("Received message fro AAApppp:", message);
       if (message.type === "incomingCall") {
+        
         setCallType(message.callType)
         setIncomingCall(message); // Set incoming call globally
         setCallState("incoming");
+        startRingtone()
         console.log("Incoming call set:", message);
       } else if (message.type === "callEnded") {
         setIncomingCall(null); // Reset state if the call ends
         setCallState("idle");
         setCallType("default")
+        stopRingtone();
         setShowInterface(false)
         console.log("Call ended");
       }
@@ -73,6 +98,7 @@ const App = () => {
   }, [setIncomingCall]);
 
   const onAcceptCall = () => {
+    stopRingtone();
     setShowInterface(true)
     acceptCall(); // Change global state to reflect the call has been accepted.
   };
