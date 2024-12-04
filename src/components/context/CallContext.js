@@ -42,6 +42,7 @@ const CallContext = createContext({
 export const useCallContext = () => useContext(CallContext);
 
 export const CallProvider = ({ children }) => {
+  const [chatMessages, setChatMessages] = useState([]);
   const [incomingCall, setIncomingCall] = useState(null);
   const [callState, setCallState] = useState("idle");
   const [showInterface, setShowInterface] = useState(false);
@@ -76,7 +77,9 @@ export const CallProvider = ({ children }) => {
         callType,
         setCallType,
         setUserId,
-        userID
+        userID,
+        chatMessages,
+        setChatMessages
       }}
     >
       {children}

@@ -14,16 +14,17 @@ import axios from "axios";
 import { useCallContext } from "../../../components/context/CallContext";
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-const ChatScreen = ({ showChatScreen, socket, location  }) => {
+const ChatScreen = ({ showChatScreen, socket  }) => {
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  const [callActive, setCallActive] = useState(location?.state?.callActive || false);
+  const [callActive, setCallActive] = useState(false);
   const [isTyping, setIsTyping] = useState(false); // To track typing status
   const receiver = JSON.parse(localStorage.getItem("receiver"));
   const senderId = localStorage.getItem("id");
   const token = localStorage.getItem("jwtToken");
   const [agoraToken, setAgoraToken] = useState();
-  const {callType, setCallType, setIncomingCall, setCallState} = useCallContext();
+  const [refresh, setRefresh] = useState(false);
+  const {callType, setCallType, setIncomingCall, incomingCall, setCallState} = useCallContext();
   console.log("ChatScreen",socket);
   const fetchChatHistory = async () => {
     try {
@@ -57,9 +58,11 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
       socket.onmessage = (event) => {
         const newMessage = JSON.parse(event.data);
         console.log("Received message:", newMessage);
-
+        if (newMessage.type === 'chatMessage'){
+          setCallActive(false)
+        }
         // check typing status
-        if (newMessage.type === "incomingCall" && newMessage.from) {
+        else if (newMessage.type === "incomingCall" && newMessage.from) {
           // Display incoming call UI
           setIncomingCall(newMessage);
           setCallState("incoming");
@@ -89,7 +92,7 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
     if (receiver) {
       fetchChatHistory();
     }
-  }, [socket, senderId, receiver._id]);
+  }, [socket, senderId, receiver._id, refresh]);
 
   const handleTyping = () => {
     if (socket) {
@@ -130,6 +133,13 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
     }
   };
 
+  const endVideoCall = () => {
+     setCallActive(false); 
+     setIncomingCall(null)
+     setCallState("idle")
+     setRefresh(!refresh)
+  }
+
   return (
     <div
       className={`flip-container relative w-full h-full font-gotham font-light `}
@@ -165,8 +175,6 @@ const ChatScreen = ({ showChatScreen, socket, location  }) => {
                         )}
                       </div>
                       {isTyping && <h4>Typing...</h4>}
-                     
-                
                     </div>
                   </div>
                   <div className={`flex ${
@@ -328,23 +336,23 @@ spmething like this */}
             </div>
           )}
         </div>
-
-        <div
+        {callActive ? (
+        <div key="calling-interface"
           className={`back transition-transform duration-500 ${
             callActive ? "transform rotate-y-180" : ""
           }`}
         >
-          {callActive && (
             <CallingInterface
+            
               channelName="abcd"
               token="asdfghj"
-              endVideoCall={() => setCallActive(false)}
+              endVideoCall={endVideoCall}
               socket={socket}
               callerCallType={callType}
               user="caller"
             />
-          )}
         </div>
+      ) : null}
       </div>
     </div>
   );

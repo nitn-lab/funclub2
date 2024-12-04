@@ -236,10 +236,11 @@ const Feeds = ({ socket }) => {
           <IoMdCart className="xs:hidden" /> Purchased
         </button> */}
           </div>
-          <div className="mx-2  mb-2">
+          <div className="scrollable-div overflow-y-auto h-[83vh] md:h-[78vh]">
+          <div className="mx-2 md:mx-0 mb-2">
           <FeedsModal />
           </div>
-          <div className="mx-2 bg-black mb-2 rounded-md sm:rounded-none text-white p-3"><p>Stories</p>
+          <div className="mx-2 md:mx-0 bg-black mb-2 rounded-md sm:rounded-none text-white p-3"><p>Stories</p>
           <div className="mt-3 flex flex-wrap gap-3">
             <div>
             <img src="https://gratisography.com/wp-content/uploads/2023/03/gratisography-dog-in-winter-hat-stock-photo-800x525.jpg"  className="h-16 w-16 rounded-full border-2 border-[#9c8fd0] p-1 object-cover"/>
@@ -266,7 +267,7 @@ const Feeds = ({ socket }) => {
           </div>
           <div className="flex w-full">
 
-            <div className="scrollable-div text-white overflow-y-auto h-[55vh] flex-grow mx-2 sm:mx-0">
+            <div className=" text-white  flex-grow mx-2 md:mx-0">
               {loading ? <div>
                 <div className="bg-black rounded-md sm:rounded-none h-full shadow-lg p-6 mb-3">
                   <div className="flex gap-3 items-center mb-5">
@@ -437,6 +438,7 @@ const Feeds = ({ socket }) => {
 
 )}
 </div> */}
+          </div>
           </div>
         </div>
         <div className="w-[305px] sm:hidden">

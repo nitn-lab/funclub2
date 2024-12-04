@@ -118,6 +118,7 @@ const CallingInterface = ({
         setIncomingCall(message);
         // initAgora(false);
       } else if (message.type === "callEnded") {
+        endVideoCall();
         setCallType("default");
         setCallStatus(false);
         stopRingtone();
@@ -202,9 +203,10 @@ const CallingInterface = ({
           newLocalVideoContainer.style.width = "25%";
           newLocalVideoContainer.style.height = "25%";
           newLocalVideoContainer.style.position = "absolute";
-          newLocalVideoContainer.style.bottom = "10px";
+          newLocalVideoContainer.style.top = "10px";
           newLocalVideoContainer.style.right = "10px";
           newLocalVideoContainer.style.zIndex = "10";
+          newLocalVideoContainer.style.borderRadius = "10px";
           localContainer.current.appendChild(newLocalVideoContainer);
           videoTrack.play(newLocalVideoContainer); // Play local video
         } else {
@@ -270,6 +272,7 @@ const CallingInterface = ({
   };
 
   const endCall = async () => {
+    endVideoCall();
     if (hasEnded) return; // Prevent duplicate end calls
 
     setHasEnded(true);
@@ -305,7 +308,7 @@ const CallingInterface = ({
     }
 
     setIsCalling(false);
-    endVideoCall();
+    
   };
 
   const acceptCall = (socket) => {
@@ -371,7 +374,7 @@ const CallingInterface = ({
         <div className="flex gap-10 justify-between absolute bottom-28">
           <button
             onClick={toggleMuteAudio}
-            className="bg-white text-black py-2 px-4 r ounded-full hover:bg-gray-200"
+            className="bg-white text-black py-2 px-4 rounded-full hover:bg-gray-200"
           >
             {audioMuted ? <MicIcon /> : <MicOffIcon /> }
           </button>

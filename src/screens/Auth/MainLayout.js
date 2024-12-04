@@ -6,7 +6,7 @@ import Signout from "../SidebarComponents/Signout";
 import { useSignOut } from "../../components/context/SignOutContext";
 import menu from '../Global/icons/menu.png'
 
-const MainLayout = () => {
+const MainLayout = () => { 
   const [open, setOpen] = useState(false);
   const [showCoin, setShowCoin] = useState(true);
   const [pageAnimation, setPageAnimation] = useState("opacity-0 blur-sm");
@@ -57,21 +57,21 @@ const MainLayout = () => {
 
   return (
     <div
-      className={`fixed inset-0 md:p-0 bg-main-gradient flex items-start w-full transition-opacity duration-700 ease-out ${pageAnimation}`}
+      className={`fixed inset-0 md:p-0 bg-main-gradient flex md:block items-start w-full transition-opacity duration-700 ease-out ${pageAnimation}`}
     >
       {/* Sidebar and header */}
-      {/* <div className=" md:flex w-full my-2 md:my-0 hidden bg-black">
+      <div className=" md:flex w-full my-2 md:my-0 hidden bg-black">
         <button
-          className="hidden md:block text-white"
+          className="hidden absolute md:block text-white z-30 mb-2"
           onClick={(e) => {e.stopPropagation(); setOpen(!open)}}
         >
           <img src={menu} className="h-6 mt-1 ml-1"/>
         </button>
-      </div> */}
+      </div>
       
       {/* Sidebar transition */}
       <div
-    className="md:absolute z-20"
+    className={`md:absolute z-20 md:flex md:gap-x-3 items-start transition-transform duration-300 ${open ? "md:translate-x-0" : "md:-translate-x-full"}`}
       >
         <Sidebarr />
       </div>

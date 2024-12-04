@@ -14,8 +14,8 @@ import search from "../screens/Global/icons/search.png";
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const StyledSidebarHeader = styled.div`
-  height: 80px;
-  min-height: 64px;
+  height: 60px;
+  min-height: 44px;
   display: flex;
   align-items: center;
 

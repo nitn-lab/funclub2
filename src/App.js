@@ -38,6 +38,8 @@ const App = () => {
   // const navigate = useNavigate();
   const socket = useWebSocket(); // get socket from WebSocketContext
   const [passSocket, setPassSocket] = useState();
+  const [showInterface, setShowInterface] = useState(false);
+  const token = localStorage.getItem('jwtToken');
   const {
     incomingCall,
     acceptCall,
@@ -45,8 +47,6 @@ const App = () => {
     callState,
     setIncomingCall,
     setCallState,
-    showInterface,
-    setShowInterface,
     setCallType
   } = useCallContext();
   useEffect(() => {
@@ -64,6 +64,7 @@ const App = () => {
         setIncomingCall(null); // Reset state if the call ends
         setCallState("idle");
         setCallType("default")
+        setShowInterface(false)
         console.log("Call ended");
       }
     };
@@ -72,10 +73,12 @@ const App = () => {
   }, [setIncomingCall]);
 
   const onAcceptCall = () => {
+    setShowInterface(true)
     acceptCall(); // Change global state to reflect the call has been accepted.
   };
 
   const onRejectCall = () => {
+    setShowInterface(false)
     // const socket = CreateWebSocketConnection();
     rejectCall(); // End the call on this user's end.
     // Optionally send a WebSocket message to inform the caller.
@@ -95,6 +98,13 @@ const App = () => {
     //   })
     // );
   };
+  const handleEndCall = () => {
+    setShowInterface(false)
+    setIncomingCall(null); // Reset state if the call ends
+    setCallState("idle");
+    setCallType("default")
+    console.log("Call ended");
+  }
   const router = createBrowserRouter([
     {
       path: "/",
@@ -205,20 +215,21 @@ const App = () => {
   return (
     <>
       {/* Render the incoming call modal globally */}
-
-      {showInterface === true
-        ? (console.log("socket", passSocket),
-          (
-            <CallingInterface
-              socket={passSocket}
-              data={incomingCall}
-              callerCallType={incomingCall?.callType}
-              channelName="abcd"
-              user="recevier"
-              endVideoCall={() => setShowInterface(false)}
-            />
-          ))
-        : callState === "incoming" && (
+      {token &&
+        <div>
+          {showInterface &&
+            (
+              <div key="caling-interface">
+                <CallingInterface
+                  socket={passSocket}
+                  data={incomingCall}
+                  callerCallType={incomingCall?.callType}
+                  channelName="abcd"
+                  user="recevier"
+                  endVideoCall={handleEndCall}
+                /></div>
+            )}
+          {callState === "incoming" && (
             <IncomingCallModal
               callerId={incomingCall}
               onAccept={() => {
@@ -228,6 +239,7 @@ const App = () => {
               onReject={() => onRejectCall()}
             />
           )}
+        </div>}
 
       {/* Provide the router */}
       <RouterProvider router={router} />
