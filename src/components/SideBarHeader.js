@@ -120,7 +120,7 @@ export const SidebarHeader = ({ children, rtl, ...rest }) => {
 
   return (
     <StyledSidebarHeader {...rest}>
-      <div className="flex items-center justify-between mx-3 py-10 font-gotham font-light">
+      <div className="flex items-center  font-gotham font-light ">
         {/* <div className="flex items-center gap-x-1.5">
           <img src={user.profileImage} className="h-10 w-10 rounded-full object-cover" />
           <div className="flex items-center gap-1">
@@ -132,7 +132,7 @@ export const SidebarHeader = ({ children, rtl, ...rest }) => {
 
         
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           <Tooltip
             title={
               <Box className='scrollable-div pr-4 font-gotham ' sx={{ width: '300px', height: '360px', overflowY: 'auto' }}>
