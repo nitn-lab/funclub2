@@ -5,6 +5,8 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import UserInfo from "./RightSidebar/UserInfo";
 import Suggestions from "./RightSidebar/Suggestions";
 import CallerProfile from "./RightSidebar/CallerProfile";
@@ -23,6 +25,8 @@ const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Extracted reusable components
 const UserProfileSection = React.memo(({ user, isSidebarExpanded }) => {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem("id");
   if (!isSidebarExpanded) return null;
 
   return (
@@ -31,6 +35,7 @@ const UserProfileSection = React.memo(({ user, isSidebarExpanded }) => {
         src={user.profileImage}
         className="h-10 w-10 rounded-full object-cover"
         alt="profile"
+        onClick={() => navigate(`/dashboard/user/${userId}`)}
       />
       <div className="flex items-center gap-1">
         <h2 className="truncate text-lg font-light text-white">

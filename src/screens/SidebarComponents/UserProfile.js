@@ -94,8 +94,15 @@ const UserProfile = () => {
               )}
               <span className="ml-1 text-sm">
                 {following ? "Following" : "Follow"}
-              </span></button>
-            
+              </span>
+             
+              </button>
+              <button className="float-right mt-3 bg-main-gradient px-2 py-1 rounded-md xs:mr-1 me-2" onClick={() => navigate('/dashboard/chats')}>  
+              <span className="ml-1 text-sm">
+                Message
+              </span> 
+              </button>
+              
               <img
                 src={user.profileImage}
                 alt="user img"
