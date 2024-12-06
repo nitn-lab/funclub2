@@ -33,9 +33,9 @@ const UserProfileSection = React.memo(({ user, isSidebarExpanded }) => {
     <div className="flex items-center gap-3">
       <img
         src={user.profileImage}
-        className="h-10 w-10 rounded-full object-cover"
+        className="h-10 w-10 rounded-full object-cover cursor-pointer"
         alt="profile"
-        onClick={() => navigate(`/dashboard/user/${userId}`)}
+        onClick={() => navigate(`/dashboard/profile`)}
       />
       <div className="flex items-center gap-1">
         <h2 className="truncate text-lg font-light text-white">

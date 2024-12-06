@@ -97,7 +97,7 @@ const UserProfile = () => {
               </span>
              
               </button>
-              <button className="float-right mt-3 bg-main-gradient px-2 py-1 rounded-md xs:mr-1 me-2" onClick={() => navigate('/dashboard/chats')}>  
+              <button className="float-right mt-3 bg-main-gradient px-2 py-1 rounded-md xs:mr-1 me-2" onClick={() => {localStorage.setItem("receiver", JSON.stringify(user)); navigate(`/dashboard/chat/${user._id}`)}}>  
               <span className="ml-1 text-sm">
                 Message
               </span> 
